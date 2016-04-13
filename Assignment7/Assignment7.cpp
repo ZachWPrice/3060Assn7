@@ -1,5 +1,6 @@
 #include <vector> 
 #include <iostream> 
+#include <algorithm>
 #include <string>
 #include <cstdlib>
 
@@ -7,6 +8,7 @@ using namespace std;
 
 void print(string method, int search) {
 	cout << method << " Total Seek: " << search << endl;
+	return;
 }
 
 
@@ -25,12 +27,53 @@ void FCFS(const vector<int>& diskLocation) {
 		else
 			total += a - b;
 	}
-
 	print(name, total);
+	return;
 }
 
-void SJF(const vector<int>& diskLocation) {
+void SSTF(const vector<int>& diskLocation) {
+	//last
+	int a = 0;
+	//next
+	int b = 0;
+	int counter = 0;
+	int temp = -1;
+	int total = 0;
+	vector<int> tracker;
+	vector<int>::const_iterator it;
+	string name = "SSTF";
 
+	tracker.push_back(0);
+
+	for (int i = 0; i < diskLocation.size() -1; i++) {
+		for (int j = 0; j < diskLocation.size(); j++) {
+			b = diskLocation[j];
+
+			it = find(diskLocation.begin(), diskLocation.end(), j);
+			if (it != diskLocation.end())
+				continue;
+
+			if (diskLocation[a] <= b) {
+				if (temp == -1 || temp > (b - diskLocation[a])) {
+					temp = b - diskLocation[a];
+					counter = j;
+				}
+			}
+			else if (diskLocation[a] > b) {
+				if (temp == -1 || temp > (diskLocation[a] - b)) {
+					temp = diskLocation[a] - b;
+					counter = j;
+				}
+			}
+		}
+		total += temp;
+		temp = -1;
+		a = counter;
+		tracker.push_back(counter);
+	}
+
+	print(name, total);
+	return;
 }
 
 void Look(const vector<int>& diskLocation) {
@@ -55,7 +98,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	FCFS(diskVect);
-	//SJF(diskVect);
+	SSTF(diskVect);
 	//Look(diskVect);
 	//cLook(diskVect);
 
