@@ -49,8 +49,8 @@ void SSTF(const vector<int>& diskLocation) {
 		for (int j = 0; j < diskLocation.size(); j++) {
 			b = diskLocation[j];
 
-			it = find(diskLocation.begin(), diskLocation.end(), j);
-			if (it != diskLocation.end())
+			it = find(tracker.begin(), tracker.end(), j);
+			if (it != tracker.end())
 				continue;
 
 			if (diskLocation[a] <= b) {
