@@ -18,7 +18,6 @@ void FCFS(const vector<int>& diskLocation) {
 	int total = 0;
 	string name = "FCFS";
 
-
 	for (int i = 0; i < diskLocation.size() - 1 ; i++){
 		a = diskLocation[i];
 		b = diskLocation[i + 1];
@@ -32,9 +31,7 @@ void FCFS(const vector<int>& diskLocation) {
 }
 
 void SSTF(const vector<int>& diskLocation) {
-	//last
 	int a = 0;
-	//next
 	int b = 0;
 	int counter = 0;
 	int temp = -1;
@@ -78,9 +75,13 @@ void SSTF(const vector<int>& diskLocation) {
 
 void Look(const vector<int>& diskLocation) {
 
+
+
 }
 
 void cLook(const vector<int>& diskLocation) {
+
+
 
 }
 
